@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Lista de Pacientes</title>
+</head>
+<body>
+  <h1>Pacientes Cadastrados</h1>
+
+  <a href="{{ url_for('create') }}">➕ Adicionar novo paciente</a>
+
+  <!-- 🔍 Filtro e Ordenação -->
+  <form method="get" action="{{ url_for('index') }}">
+    <input type="text" name="q" placeholder="Buscar por paciente ou bairro" value="{{ request.args.get('q', '') }}">
+    
+    <label>Ordenar por:</label>
+    <select name="sort">
+      <option value="data_consulta" {% if request.args.get('sort') == 'data_consulta' %}selected{% endif %}>Data Consulta</option>
+      <option value="bairro" {% if request.args.get('sort') == 'bairro' %}selected{% endif %}>Bairro</option>
+      <option value="idade" {% if request.args.get('sort') == 'idade' %}selected{% endif %}>Idade</option>
+    </select>
+
+    <select name="order">
+      <option value="asc" {% if request.args.get('order') == 'asc' %}selected{% endif %}>Ascendente</option>
+      <option value="desc" {% if request.args.get('order') == 'desc' %}selected{% endif %}>Descendente</option>
+    </select>
+
+    <button type="submit">Aplicar</button>
+  </form>
+
+  <table border="1" cellpadding="5" cellspacing="0">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>PacienteID</th>
+        <th>AgendamentoID</th>
+        <th>Gênero</th>
+        <th>Data Consulta</th>
+        <th>Data Agendamento</th>
+        <th>Idade</th>
+        <th>Bairro</th>
+        <th>Bolsa Estudos</th>
+        <th>Hipertensão</th>
+        <th>Diabetes</th>
+        <th>Alcoolismo</th>
+        <th>Handcap</th>
+        <th>SMS Recebido</th>
+        <th>Compareceu</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for paciente in pacientes %}
+      <tr>
+        <td>{{ paciente['id'] }}</td>
+        <td>{{ paciente['paciente_id'] }}</td>
+        <td>{{ paciente['agendamento_id'] }}</td>
+        <td>{{ paciente['genero'] }}</td>
+        <td>{{ paciente['data_consulta'] }}</td>
+        <td>{{ paciente['data_agendamento'] }}</td>
+        <td>{{ paciente['idade'] }}</td>
+        <td>{{ paciente['bairro'] }}</td>
+        <td>{{ 'Sim' if paciente['bolsa_estudos'] else 'Não' }}</td>
+        <td>{{ 'Sim' if paciente['hipertensao'] else 'Não' }}</td>
+        <td>{{ 'Sim' if paciente['diabetes'] else 'Não' }}</td>
+        <td>{{ 'Sim' if paciente['alcoolismo'] else 'Não' }}</td>
+        <td>{{ 'Sim' if paciente['handcap'] else 'Não' }}</td>
+        <td>{{ 'Sim' if paciente['sms_recebido'] else 'Não' }}</td>
+        <td>{{ 'Sim' if paciente['compareceu'] else 'Não' }}</td>
+        <td>
+          <a href="{{ url_for('update', id=paciente['id']) }}">✏️ Editar</a>
+          <a href="{{ url_for('delete', id=paciente['id']) }}">🗑️ Excluir</a>
+        </td>
+      </tr>
+      {% else %}
+      <tr>
+        <td colspan="16">Nenhum paciente encontrado.</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <!-- 📄 Paginação -->
+  <div>
+    {% if page > 1 %}
+      <a href="{{ url_for('index', page=page-1, q=request.args.get('q'), sort=request.args.get('sort'), order=request.args.get('order')) }}">« Anterior</a>
+    {% endif %}
+
+    Página {{ page }} de {{ total_pages }}
+
+    {% if page < total_pages %}
+      <a href="{{ url_for('index', page=page+1, q=request.args.get('q'), sort=request.args.get('sort'), order=request.args.get('order')) }}">Próxima »</a>
+    {% endif %}
+  </div>
+</body>
+</html>

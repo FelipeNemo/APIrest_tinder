@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Adicionar Paciente</title>
+</head>
+<body>
+  <h1>Novo Paciente</h1>
+
+  <form method="post">
+    <label>PacienteID:</label>
+    <input type="number" name="paciente_id" required><br>
+
+    <label>AgendamentoID:</label>
+    <input type="number" name="agendamento_id" required><br>
+
+    <label>Gênero:</label>
+    <input type="text" name="genero" required><br>
+
+    <label>Data Consulta:</label>
+    <input type="date" name="data_consulta" required><br>
+
+    <label>Data Agendamento:</label>
+    <input type="date" name="data_agendamento" required><br>
+
+    <label>Idade:</label>
+    <input type="number" name="idade" required><br>
+
+    <label>Bairro:</label>
+    <input type="text" name="bairro"><br>
+
+    <label>Bolsa Estudos:</label>
+    <input type="checkbox" name="bolsa_estudos"><br>
+
+    <label>Hipertensão:</label>
+    <input type="checkbox" name="hipertensao"><br>
+
+    <label>Diabetes:</label>
+    <input type="checkbox" name="diabetes"><br>
+
+    <label>Alcoolismo:</label>
+    <input type="checkbox" name="alcoolismo"><br>
+
+    <label>Handcap:</label>
+    <input type="checkbox" name="handcap"><br>
+
+    <label>SMS Recebido:</label>
+    <input type="checkbox" name="sms_recebido"><br>
+
+    <label>Compareceu:</label>
+    <input type="checkbox" name="compareceu"><br>
+
+    <button type="submit">Salvar</button>
+  </form>
+
+  <a href="{{ url_for('index') }}">← Voltar</a>
+</body>
+</html>
