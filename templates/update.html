@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Editar Paciente</title>
+</head>
+<body>
+  <h1>Editar Paciente</h1>
+
+  <form method="post">
+    <label>PacienteID:</label>
+    <input type="number" name="paciente_id" value="{{ paciente['paciente_id'] }}" required><br>
+
+    <label>AgendamentoID:</label>
+    <input type="number" name="agendamento_id" value="{{ paciente['agendamento_id'] }}" required><br>
+
+    <label>Gênero:</label>
+    <input type="text" name="genero" value="{{ paciente['genero'] }}" required><br>
+
+    <label>Data Consulta:</label>
+    <input type="date" name="data_consulta" value="{{ paciente['data_consulta'] }}" required><br>
+
+    <label>Data Agendamento:</label>
+    <input type="date" name="data_agendamento" value="{{ paciente['data_agendamento'] }}" required><br>
+
+    <label>Idade:</label>
+    <input type="number" name="idade" value="{{ paciente['idade'] }}" required><br>
+
+    <label>Bairro:</label>
+    <input type="text" name="bairro" value="{{ paciente['bairro'] }}"><br>
+
+    <label>Bolsa Estudos:</label>
+    <input type="checkbox" name="bolsa_estudos" {% if paciente['bolsa_estudos'] %}checked{% endif %}><br>
+
+    <label>Hipertensão:</label>
+    <input type="checkbox" name="hipertensao" {% if paciente['hipertensao'] %}checked{% endif %}><br>
+
+    <label>Diabetes:</label>
+    <input type="checkbox" name="diabetes" {% if paciente['diabetes'] %}checked{% endif %}><br>
+
+    <label>Alcoolismo:</label>
+    <input type="checkbox" name="alcoolismo" {% if paciente['alcoolismo'] %}checked{% endif %}><br>
+
+    <label>Handcap:</label>
+    <input type="checkbox" name="handcap" {% if paciente['handcap'] %}checked{% endif %}><br>
+
+    <label>SMS Recebido:</label>
+    <input type="checkbox" name="sms_recebido" {% if paciente['sms_recebido'] %}checked{% endif %}><br>
+
+    <label>Compareceu:</label>
+    <input type="checkbox" name="compareceu" {% if paciente['compareceu'] %}checked{% endif %}><br>
+
+    <button type="submit">Atualizar</button>
+  </form>
+
+  <a href="{{ url_for('index') }}">← Voltar</a>
+</body>
+</html>
